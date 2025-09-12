@@ -2,7 +2,7 @@
 
 > Премиум-пространство, объединяющее кинопоказы, театр и гастрономию для уникального вечера. Проект реализован на полном стеке современных веб-технологий.
 
-![Celeston Logo](https://github.com/username/repo-name/blob/main/assets/logo.png?raw=true) _Здесь будет логотип_
+![Celeston Logo](<https://github.com/ZeroD1vision/Celeston-Theatre/blob/main/Codes/Client/public/logo%20(text%3Dblack).png>) _Здесь будет логотип_
 
 ---
 
