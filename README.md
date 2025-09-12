@@ -198,12 +198,12 @@ Server/
 <table align="center">
   <tr>
     <td align="center" width="50%">
-      📧 **Email**<br>
+      📧 <strong>Email<br>
       <a href="mailto:anatolypozd739@gmail.com">anatolypozd739@gmail.com</a>
     </td>
     <td align="center" width="50%">
-      🔗 **GitHub**<br>
-      <a href="https://github.com/ZeroD1vision">[Профиль](https://github.com/ZeroD1vision)</a>
+      🔗 <strong>GitHub<br>
+      <a href="https://github.com/ZeroD1vision">Профиль GitHub</a>
     </td>
   </tr>
 </table>
