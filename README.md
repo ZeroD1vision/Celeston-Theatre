@@ -1,10 +1,16 @@
 # 🎭 Celeston — Культурный хаб нового поколения
 
-> Премиум-пространство, объединяющее кинопоказы, театр и гастрономию для уникального вечера. Проект реализован на полном стеке современных веб-технологий.
-
+<table>
+    <tr>
+        <td valign="top" width="30%">
+            <img src="https://github.com/ZeroD1vision/Celeston-Theatre/blob/main/Codes/Client/public/logo%20(text%3Dblack).png" width="200" alt="Celeston Logo">
+        </td>
+        <td valign="top" width="70%">
+            > Премиум-пространство, объединяющее кинопоказы, театр и гастрономию для уникального вечера. Проект реализован на полном стеке современных веб-технологий.
+        </td>
+    </tr>
+</table>
 <!-- ![Celeston Logo](<https://github.com/ZeroD1vision/Celeston-Theatre/blob/main/Codes/Client/public/logo%20(text%3Dblack).png>) -->
-
-<img src="https://github.com/ZeroD1vision/Celeston-Theatre/blob/main/Codes/Client/public/logo%20(text%3Dblack).png" width="200" alt="Celeston Logo">
 
 **🚀 Live Demo** | **📖 Документация** | **💻 Исходный код**
 
