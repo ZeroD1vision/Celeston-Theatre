@@ -10,7 +10,7 @@ const getCookieOptions = () => ({
     // secure: process.env.NODE_ENV === 'production',
     secure: false,
     // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-    sameSite: Lax,
+    sameSite: 'Lax',
     path: '/'
   });
 
@@ -53,7 +53,7 @@ const refreshToken = async (req, res) => {
             // secure: process.env.NODE_ENV === 'production',
             secure: false,
             // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-            sameSite: Lax,
+            sameSite: 'Lax',
             path: "/",
             // domain: process.env.NODE_ENV === 'production' ? 'domain.ru' : 'localhost'
             domain: 'localhost'
@@ -119,7 +119,7 @@ const registerUser = async (req, res) => {
             sameSite: 'Lax',
             path: "/",
             // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
-            domain: undefined,
+            // domain: 'localhost',
             maxAge: 60 * 60 * 1000 // 60 минут
         });
 
@@ -131,7 +131,7 @@ const registerUser = async (req, res) => {
             sameSite: 'Lax',
             path: "/",
             // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
-            domain: undefined,
+            // domain: 'localhost',
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 дней
         });
 
@@ -174,7 +174,7 @@ const loginUser = async (req, res) => {
             sameSite: 'Lax',
             path: "/",
             // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
-            domain: 'localhost',
+            // domain: 'localhost',
             maxAge: 60 * 60 * 1000 // 60 минут
         });
 
@@ -186,7 +186,7 @@ const loginUser = async (req, res) => {
             sameSite: 'Lax',
             path: "/",
             // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
-            domain: 'localhost',
+            // domain: 'localhost',
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 дней
         });
 

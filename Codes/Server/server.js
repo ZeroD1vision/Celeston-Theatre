@@ -12,7 +12,7 @@ const movieController = require('./controllers/movieController');
 const JWT_SECRET = process.env.JWT_SECRET || '911onelove9111';
 
 const app = express();
-const PORT = process.env.NODE_ENV === 'production' ? 3001 : 3001;
+const PORT = process.env.NODE_ENV === 'production' ? 3000 : 3001;
 
 // Создаем реестр метрик
 const register = new client.Registry();
