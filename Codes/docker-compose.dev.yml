@@ -12,6 +12,9 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - REACT_APP_API_BASE_URL=http://localhost:3001
+      - WDS_SOCKET_HOST=localhost  # Важно для hot reload
+      - FAST_REFRESH=true          # Включение быстрого обновления
+      - HOST=0.0.0.0               # Разрешаем доступ с любого хоста
     networks:
       - cinema-network-dev
     stdin_open: true

@@ -78,7 +78,10 @@ const MoviePage = () => {
                 <div className="movie-poster-section">
                     <div className="movie-poster-wrapper">
                         {movie.image ? ( <img 
-                            src={`/${movie.image}`} 
+                            src={
+                                process.env.NODE_ENV === "development"
+                                ? `http://localhost:3001/${movie.image}`
+                                : `/${movie.image}`} 
                             alt={movie.title} 
                             className="movie-poster"
                             onError={(e) => {

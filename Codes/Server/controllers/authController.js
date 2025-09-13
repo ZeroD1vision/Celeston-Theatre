@@ -7,8 +7,10 @@ const SALT_ROUNDS = 10;
 
 const getCookieOptions = () => ({
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+    // secure: process.env.NODE_ENV === 'production',
+    secure: false,
+    // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+    sameSite: Lax,
     path: '/'
   });
 
@@ -48,10 +50,13 @@ const refreshToken = async (req, res) => {
         // Общие настройки для кук
         const cookieOptions = {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            // secure: process.env.NODE_ENV === 'production',
+            secure: false,
+            // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            sameSite: Lax,
             path: "/",
-            domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : 'localhost'
+            // domain: process.env.NODE_ENV === 'production' ? 'domain.ru' : 'localhost'
+            domain: 'localhost'
         };
 
         // Обновляем куки
@@ -108,19 +113,25 @@ const registerUser = async (req, res) => {
         // Устанавливаем куки
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            secure: false,
+            sameSite: 'Lax',
             path: "/",
-            domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
+            // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
+            domain: undefined,
             maxAge: 60 * 60 * 1000 // 60 минут
         });
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            secure: false,
+            sameSite: 'Lax',
             path: "/",
-            domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
+            // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
+            domain: undefined,
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 дней
         });
 
@@ -157,19 +168,25 @@ const loginUser = async (req, res) => {
         // Устанавливаем куки
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Для HTTP в разработке
-            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // "None" на "Lax" для локальной разработки
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            secure: false,
+            sameSite: 'Lax',
             path: "/",
-            domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : 'localhost',
+            // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
+            domain: 'localhost',
             maxAge: 60 * 60 * 1000 // 60 минут
         });
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            secure: false,
+            sameSite: 'Lax',
             path: "/",
-            domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : 'localhost',
+            // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
+            domain: 'localhost',
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 дней
         });
 
