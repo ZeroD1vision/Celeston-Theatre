@@ -69,10 +69,15 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (user && window.location.pathname === '/login') {
-      navigate('/profile');
+    // Не пытаемся проверять аутентификацию если не авторизованы
+    if (!isLoading && !user && window.location.pathname !== '/login') {
+      window.location.href = '/login';
     }
-  }, [user]);
+    
+    if (user && window.location.pathname === '/login') {
+      window.location.href = '/profile';
+    }
+  }, [user, isLoading]);
 
   if (isLoading) {
     return <div>Loading...</div>;
