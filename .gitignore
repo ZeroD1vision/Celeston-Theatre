@@ -18,3 +18,5 @@ launch.json
 
 # Игнорировать файл с данными о БД
 .env
+.env.local
+.env.production
