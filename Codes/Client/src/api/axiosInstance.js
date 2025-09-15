@@ -21,6 +21,13 @@ instance.interceptors.response.use(
 
     const originalRequest = error.config;
 
+    if (originalRequest.request.url === 'auth/refresh' 
+      && error.response?.status === 401) {
+        console.log('Refresh token is invalid, redirecting to login');
+        window.location.href = '/login';
+        return Promise.reject(error);
+      }
+
     // Обработка просроченного access token
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
