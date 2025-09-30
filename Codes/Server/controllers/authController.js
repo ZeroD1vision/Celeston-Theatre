@@ -9,8 +9,7 @@ const getCookieOptions = () => ({
     httpOnly: true,
     // secure: process.env.NODE_ENV === 'production',
     secure: false,
-    // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-    sameSite: 'Lax',
+    sameSite: process.env.NODE_ENV === 'development' ? 'Lax' : 'Lax',
     path: '/'
   });
 
@@ -52,11 +51,9 @@ const refreshToken = async (req, res) => {
             httpOnly: true,
             // secure: process.env.NODE_ENV === 'production',
             secure: false,
-            // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-            sameSite: 'Lax',
+            sameSite: process.env.NODE_ENV === 'development' ? 'Lax' : 'Lax',
             path: "/",
             // domain: process.env.NODE_ENV === 'production' ? 'domain.ru' : 'localhost'
-            domain: 'localhost'
         };
 
         // Обновляем куки
@@ -114,9 +111,8 @@ const registerUser = async (req, res) => {
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
             // secure: process.env.NODE_ENV === 'production',
-            // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            sameSite: process.env.NODE_ENV === 'development' ? 'Lax' : 'Lax',
             secure: false,
-            sameSite: 'Lax',
             path: "/",
             // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
             // domain: 'localhost',
@@ -126,9 +122,8 @@ const registerUser = async (req, res) => {
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             // secure: process.env.NODE_ENV === 'production',
-            // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            sameSite: process.env.NODE_ENV === 'development' ? 'Lax' : 'Lax',
             secure: false,
-            sameSite: 'Lax',
             path: "/",
             // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
             // domain: 'localhost',
@@ -163,32 +158,37 @@ const loginUser = async (req, res) => {
             throw new Error('Неверные учетные данные');
         }
 
+        console.log("to generation");
         const { accessToken, refreshToken } = generateTokens(user);
+
+        console.log("after generation");
 
         // Устанавливаем куки
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
             // secure: process.env.NODE_ENV === 'production',
-            // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            sameSite: process.env.NODE_ENV === 'development' ? 'Lax' : 'Lax',
             secure: false,
-            sameSite: 'Lax',
             path: "/",
             // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
             // domain: 'localhost',
             maxAge: 60 * 60 * 1000 // 60 минут
         });
 
+        console.log("after access");
+
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             // secure: process.env.NODE_ENV === 'production',
-            // sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            sameSite: process.env.NODE_ENV === 'development' ? 'Lax' : 'Lax',
             secure: false,
-            sameSite: 'Lax',
             path: "/",
             // domain: process.env.NODE_ENV === 'production' ? '.yourdomain.com' : undefined,
             // domain: 'localhost',
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 дней
         });
+
+        console.log("after refresh");
 
         res.json({
             success: true,
