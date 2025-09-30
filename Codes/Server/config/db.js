@@ -293,6 +293,27 @@ const getLevelById = async (levelId) => {
     }
 };
 
+// Функции для работы с сеансами
+const getSessionsByMovieId = async (movieId) => {
+    const result = await pool.query(
+        'SELECT * FROM sessions WHERE movie_id = $1 ORDER BY date, time',
+        [movieId]
+    );
+    return result.rows;
+}
+
+const getSessionById = async (sessionId) => {
+    const result = await pool.query(
+       `SELECT s.*, m.title as movie_title
+        FROM sessions s
+        JOIN movies m ON s.movie_id = m.id
+        WHERE s.id = $1`,
+        [sessionId]
+    );
+    return result.rows[0];
+}
+// Прямой связи между tickets и movies нет — билет не знает напрямую, 
+// на какой фильм он куплен; он знает только сеанс, а сеанс знает фильм.
 module.exports = {
     addUserToDB,
     findUserById,
@@ -311,4 +332,6 @@ module.exports = {
     updateMoviePosition,
     getLevelById,
     pool,
+    getSessionsByMovieId,
+    getSessionById
 };
