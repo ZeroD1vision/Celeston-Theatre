@@ -332,13 +332,30 @@ const getUserTickets = async (userId) => {
          WHERE t.user_id = $1
          ORDER BY t.purchase_date DESC`,
         [userId]
+        // Прямой связи между tickets и movies нет — билет не знает напрямую, 
+        // на какой фильм он куплен; он знает только сеанс, а сеанс знает фильм.
     );
     return result.rows;
 }
 
-// Прямой связи между tickets и movies нет — билет не знает напрямую, 
-// на какой фильм он куплен; он знает только сеанс, а сеанс знает фильм.
+// TODO: Реализовать функцию createTransaction
+const createTransaction = async (userId, amount, type, description) => {
+};
+
+// TODO: Реализовать функцию getUserTransactions
+const getUserTransactions = async (userId) => {
+};
+
+// TODO: Реализовать функцию updateUserBalance
+const updateUserBalance = async (userId, amount) => {
+};
+
+// TODO: Реализовать функцию updateUserTickets
+const updateUserTickets = async (userId, amount) => {
+};
+
 module.exports = {
+    pool,
     addUserToDB,
     findUserById,
     findUserByUsernameInDB,
@@ -355,9 +372,12 @@ module.exports = {
     updateMovie,
     updateMoviePosition,
     getLevelById,
-    pool,
     getSessionsByMovieId,
     getSessionById,
     createTicket,
     getUserTickets,
+    createTransaction,
+    getUserTransactions,
+    updateUserBalance,
+    updateUserTickets
 };
