@@ -312,6 +312,30 @@ const getSessionById = async (sessionId) => {
     );
     return result.rows[0];
 }
+
+// Функции для работы с билетами
+const createTicket = async (userId, sessionId, seat) => {
+    const result = await pool.query(
+       `INSERT INTO tickets (user_id, session_id, seat)
+       VALUES ($1, $2, $3) RETURNING *`,
+       [userId, sessionId, seat]
+    );
+    return result.rows[0];
+}
+
+const getUserTickets = async (userId) => {
+    const result = await pool.query(
+        `SELECT t.*, s.date, s.time, s.hall, s.price, m.title AS movie_title
+         FROM tickets t
+         JOIN sessions s ON t.session_id = s.id
+         JOIN movies m ON t.movie_id = m.id
+         WHERE t.user_id = $1
+         ORDER BY t.purchase_date DESC`,
+        [userId]
+    );
+    return result.rows;
+}
+
 // Прямой связи между tickets и movies нет — билет не знает напрямую, 
 // на какой фильм он куплен; он знает только сеанс, а сеанс знает фильм.
 module.exports = {
@@ -333,5 +357,7 @@ module.exports = {
     getLevelById,
     pool,
     getSessionsByMovieId,
-    getSessionById
+    getSessionById,
+    createTicket,
+    getUserTickets,
 };

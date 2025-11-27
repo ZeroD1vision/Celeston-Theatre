@@ -1,7 +1,11 @@
 # Документация по работе таблиц для транзакций
+
 ## Основные таблицы
 
+## Продвинутые
+
 ### 1. Создание таблиц
+
 ```sql
 -- Кинотеатральные залы
 CREATE TABLE halls (
@@ -45,46 +49,88 @@ CREATE TABLE transactions (
     amount DECIMAL(10,2) NOT NULL,
     type VARCHAR(20) NOT NULL CHECK(type IN ('purchase', 'refund')),
     created_at TIMESTAMP DEFAULT NOW()
-); 
+);
+```
+
+## Текущие
+
+```sql
+-- Таблица для сеансов
+CREATE TABLE IF NOT EXISTS sessions (
+    id SERIAL PRIMARY KEY,
+    movie_id INTEGER NOT NULL REFERENCES movies(id) ON DELETE CASCADE,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    hall VARCHAR(50) NOT NULL,
+    price DECIMAL(10,2) NOT NULL DEFAULT 0
+);
+
+-- Таблица для билетов
+CREATE TABLE IF NOT EXISTS tickets (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    session_id INTEGER NOT NULL REFERENCES sessions(id) ON DELETE CASCADE,
+    seat VARCHAR(10) NOT NULL,
+    purchase_date TIMESTAMP DEFAULT NOW(),
+    status VARCHAR(20) DEFAULT 'active'
+);
+
+-- Таблица для транзакций
+CREATE TABLE IF NOT EXISTS transactions (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    amount DECIMAL(10,2) NOT NULL,
+    type VARCHAR(20) NOT NULL,
+    description TEXT,
+    date TIMESTAMP DEFAULT NOW()
+);
+
+-- Добавим тестовые сеансы
+INSERT INTO sessions (movie_id, date, time, hall, price) VALUES
+(1, '2024-01-15', '18:00', 'Зал 1', 300),
+(1, '2024-01-15', '21:00', 'Зал 1', 350),
+(2, '2024-01-16', '19:30', 'Зал 2', 320),
+(3, '2024-01-17', '20:00', 'Зал 3', 400);
 ```
 
 ### 2. Работа с API
+
 ```javascript
 // Получение сеансов для фильма
-app.get('/api/movies/:id/screenings', async (req, res) => {
-    try {
-        const screenings = await db.getMovieScreenings(req.params.id);
-        res.json({ success: true, data: screenings });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
-    }
+app.get("/api/movies/:id/screenings", async (req, res) => {
+  try {
+    const screenings = await db.getMovieScreenings(req.params.id);
+    res.json({ success: true, data: screenings });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 });
 
 // Получение информации о зале и местах
-app.get('/api/screenings/:id/seats', async (req, res) => {
-    try {
-        const { seats, hall } = await db.getScreeningSeats(req.params.id);
-        res.json({ success: true, seats, hall });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
-    }
+app.get("/api/screenings/:id/seats", async (req, res) => {
+  try {
+    const { seats, hall } = await db.getScreeningSeats(req.params.id);
+    res.json({ success: true, seats, hall });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 });
 
 // Покупка билетов
-app.post('/api/tickets/purchase', authMiddleware, async (req, res) => {
-    try {
-        const { screeningId, seats, total } = req.body;
-        
-        const result = await db.purchaseTickets({
-            userId: req.user.id,
-            screeningId,
-            seats,
-            total
-        });
-        
-        res.json({ success: true, tickets: result });
-    } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
-    }
+app.post("/api/tickets/purchase", authMiddleware, async (req, res) => {
+  try {
+    const { screeningId, seats, total } = req.body;
+
+    const result = await db.purchaseTickets({
+      userId: req.user.id,
+      screeningId,
+      seats,
+      total,
+    });
+
+    res.json({ success: true, tickets: result });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
 });
 ```
