@@ -10,7 +10,13 @@ export const fetchMovies = async () => {
 
         return response.data.data;
     } catch (error) {
-        console.error('Ошибка при загрузке фильмов:', error);
+        if (error.code === 'NETWORK_ERROR' || error.isNetworkError) {
+            console.warn('Сервер недоступен, возвращаем пустой массив');
+            return []; // Возвращаем пустой массив вместо ошибки
+        }
+        
+        // Для других ошибок пробрасываем дальше
+        console.error('Ошибка при загрузке фильмов:', error.message);
         throw error;
     }
 };

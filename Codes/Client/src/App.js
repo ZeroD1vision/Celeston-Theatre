@@ -105,6 +105,23 @@ const RequireAuth = ({ children, allowedRoles = [] }) => {
   return children;
 };
 
+const RequireGuest = ({ children }) => {
+  const { user, isLoading } = useAuth();
+  const location = useLocation();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (user) {
+    // Если авторизован, перенаправляем на профиль или страницу, с которой пришел
+    const from = location.state?.from?.pathname || '/profile';
+    return <Navigate to={from} replace />;
+  }
+
+  return children;
+};
+
 
 function App() {
 
@@ -113,16 +130,17 @@ function App() {
       <div className="app-background"></div>
 
       <NotificationProvider>
-        <AuthProvider>
-          <Router>
+        <Router>
+          <AuthProvider>
             <PageTitle />
             <AppContent />
-          </Router>
-        </AuthProvider>
+          </AuthProvider>
+        </Router>
       </NotificationProvider>
     </div>
   );
 }
+
 function AppContent() {
   const { user } = useAuth();
   const navRef = useRef(null);
@@ -163,8 +181,23 @@ function AppContent() {
             </RequireAuth>
           }
         />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegistrationForm />} />
+        {/* Защищаем /login и /register от авторизованных пользователей */}
+        <Route 
+          path="/login" 
+          element={
+            <RequireGuest>
+              <LoginForm />
+            </RequireGuest>
+          } 
+        />
+        <Route 
+          path="/register" 
+          element={
+            <RequireGuest>
+              <RegistrationForm />
+            </RequireGuest>
+          } 
+        />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
         {/*Для админов*/}
@@ -202,7 +235,7 @@ function AppContent() {
         <Link to="/about" className="footer-link">Контакты</Link> | 
         <Link to="/terms" className="footer-link">Условия использования</Link>
       </div>
-      </footer>
+      </footer>    
     </>
   );
 }
