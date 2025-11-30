@@ -64,7 +64,7 @@ export const createMovie = async (movieData) => {
         },
         body: JSON.stringify({
             ...movieData,
-            genres: selectedGenres // Добавить выбранные жанры
+            genres: movieData.genres // Добавить выбранные жанры
         })
     });
 

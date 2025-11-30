@@ -34,6 +34,7 @@ const MovieFormPage = () => {
     const [genresList, setGenresList] = useState([]);
     const [initialValues, setInitialValues] = useState(null);
     const formRef = useRef();
+    const [submitCount, setSubmitCount] = useState(0); // Используем хук для отслеживания изменений
 
     const scrollToError = () => {
         const firstError = document.querySelector('.invalid');
@@ -51,6 +52,12 @@ const MovieFormPage = () => {
           if (input) input.focus({ preventScroll: true });
         }
     };
+
+    useEffect(() => {
+      if (submitCount > 0) {
+        scrollToError();
+      }
+    }, [submitCount]);
 
     useEffect(() => {
       if (user?.role !== 'admin') {
@@ -138,18 +145,6 @@ const MovieFormPage = () => {
             validate={(values) => validate(values, genresList)}
             render={({ handleSubmit, submitting, form, submitFailed, errors, values }) => {
               
-              const formApiRef = useRef(form);
-              formApiRef.current = form;
-
-              // Используем хук для отслеживания изменений
-              const [submitCount, setSubmitCount] = useState(0);
-
-              useEffect(() => {
-                if (submitFailed || submitCount > 0) {
-                  scrollToError();
-                }
-              }, [submitFailed, errors, submitCount]);
-
               return (
                 <form
                   onSubmit={async event => { 
@@ -304,7 +299,7 @@ const MovieFormPage = () => {
                       type="button"
                       className="btn-cancel"
                       onClick={() => {
-                        formApiRef.current.reset();
+                        form.current.reset();
                         navigate('/movies');
                     }}
                     >

@@ -1,0 +1,35 @@
+{
+  "name": "celeston-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "Codes/Client",
+    "Codes/Server"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "dev:up": "docker-compose -f Codes/docker-compose.dev.yml up",
+    "dev:down": "docker-compose -f Codes/docker-compose.dev.yml down",
+    "dev:build": "docker-compose -f Codes/docker-compose.dev.yml build",
+    "client": "npm run start --workspace=client",
+    "server": "npm run dev --workspace=server",
+    "lint": "npm run lint --workspace=client && npm run lint --workspace=server",
+    "lint:fix": "npm run lint:fix --workspace=client && npm run lint:fix --workspace=server",
+    "test": "npm run test --workspace=client -- --watchAll=false --passWithNoTests && npm run test --workspace=server -- --watchAll=false --passWithNoTests",
+    "test:watch": "npm run test --workspace=client && npm run test --workspace=server"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@eslint/js": "^9.39.1",
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^9.1.7",
+    "identity-obj-proxy": "^3.0.0"
+  }
+}

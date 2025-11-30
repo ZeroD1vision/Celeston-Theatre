@@ -1,16 +1,10 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs');
 const LocalStrategy = require('passport-local').Strategy;
-const NodeCache = require('node-cache');
-const morgan = require('morgan');
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const authRoutes = require('./routes/authRoutes');
-const authController = require('./controllers/authController');
 const { getIp } = require('./utils/network.js');
 const movieRoutes = require('./routes/movieRoutes');
 const db = require('./config/db');
