@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
 
-const JWT_SECRET = process.env.JWT_SECRET || '911onelove9111';
+// const JWT_SECRET = process.env.JWT_SECRET || '911onelove9111';
 const SALT_ROUNDS = 10;
 
 const getCookieOptions = () => ({

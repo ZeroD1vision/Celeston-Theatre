@@ -68,7 +68,7 @@ export async function checkIfAdmin() {
             }
         });
 
-        if (!user.ok) {
+        if (!response.ok) {
             showError('Пользователь не авторизован');
             return; // Завершаем выполнение функции, если пользователь не авторизован
         }

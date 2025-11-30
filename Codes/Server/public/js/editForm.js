@@ -1,3 +1,5 @@
+import { showError, showNotification } from './notifications.js';
+
 // Функция для отображения уведомлений
 document.getElementById('profile-form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Предотвращаем стандартное поведение формы
@@ -9,6 +11,10 @@ document.getElementById('profile-form').addEventListener('submit', async functio
 
     // Проверка уникальности никнейма
     const isNicknameUnique = await checkNickname(nickname);
+    if (!isNicknameUnique) {
+        showError('Этот никнейм уже занят. Выберите другой.');
+        return; // Остановка отправки формы
+    }
     // Валидация формы
     if (!email.includes('@')) {
         showError('Пожалуйста, введите корректный email.');
@@ -58,8 +64,5 @@ export async function checkNickname(nickname) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Привязываем функции к событиям отправки форм
-    document.getElementById('profile-form').addEventListener('submit', updateProfile);
-
     console.log('DOM полностью загружен и разобран');
 });

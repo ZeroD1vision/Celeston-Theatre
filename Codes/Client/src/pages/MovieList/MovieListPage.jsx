@@ -72,7 +72,14 @@ const MovieListPage = () => {
             
             setMovies(moviesWithImages);
         } catch (error) {
-            showNotification(`Ошибка загрузки фильмов: ${error.message}`, 'error');
+            if (error.isNetworkError) {
+              // Для сетевых ошибок показываем заглушку
+              setMovies([]);
+              showNotification('Сервер временно недоступен', 'warning');
+            } else {
+              console.error('Ошибка загрузки фильмов:', error);
+              showNotification('Ошибка при загрузке фильмов', 'error');
+            }
         } finally {
             setLoading(false);
         }

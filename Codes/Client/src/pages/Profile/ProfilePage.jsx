@@ -21,7 +21,10 @@ const ProfilePage = () => {
   // Загрузка данных профиля
   useEffect(() => {
     const fetchProfile = async () => {
-      if (!user) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
   
       try {
         const userResponse = await axiosInstance.get('/users/me');
@@ -110,8 +113,9 @@ const ProfilePage = () => {
 
     const handleLogout = async () => {
       try {
-        await axiosInstance.post('/auth/logout');
         logout();
+        axiosInstance.post('/auth/logout', {}, {withCredentials: true })
+          .catch(e => console.log('Background logout error:', e));
         showNotification('Вы успешно вышли из системы', 'success');
         navigate('/login');
       } catch (error) {

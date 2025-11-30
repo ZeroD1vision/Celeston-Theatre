@@ -195,7 +195,7 @@ const updateUser = async (userId, userData) => {
 const deleteUserById = async (userId) => {
     try {
         await pool.query('DELETE FROM users WHERE id = $1', [userId]);
-    } catch {
+    } catch (error) {
         console.error('Ошибка обновления пользователя:', error);
         throw new Error('Ошибка при обновлении профиля');
     }
@@ -262,6 +262,8 @@ const updateMovie = async (id, movieData) => {
 
 
 const updateMoviePosition = async (movieId, newPosition) => {
+    const currentPosition = (await pool.query('SELECT position FROM movies WHERE id = $1', [movieId])).rows[0]?.position || 0;
+
     await pool.query(`
         UPDATE movies
         SET position = position + 1

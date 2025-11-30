@@ -8,12 +8,22 @@ const instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
-  }
+  },
+  timeout: 10000
 });
 
 instance.interceptors.response.use(
   (response) => response,
   async error => {
+    // error.response = undefined в ошибках сети
+    if (!error.response) {
+      console.error('Network Error: Server is unavailable');
+      const networkError = new Error('Сервер недоступен. Пожалуйста, проверьте подключение.');
+      networkError.isNetworkError = true;
+      networkError.code = 'NETWORK_ERROR';
+      return Promise.reject(networkError);
+    }
+    
     // Пропускаем обработку ошибок для страницы логина
     if (window.location.pathname === '/login') {
       return Promise.reject(error);
