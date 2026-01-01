@@ -3,7 +3,7 @@
 <table>
     <tr>
         <td valign="top" width="30%">
-            <img src="https://github.com/ZeroD1vision/Celeston-Theatre/blob/main/Codes/Client/public/logo%20(text%3Dblack).png" width="200" alt="Celeston Logo">
+            <img src="https://github.com/ZeroD1vision/Celeston-Theatre/blob/main/src/client/public/logo%20(text%3Dblack).png" width="200" alt="Celeston Logo">
         </td>
         <td valign="top" width="70%">
             Премиум-пространство, объединяющее кинопоказы, театр и гастрономию для уникального вечера. Проект реализован на полном стеке современных веб-технологий.
