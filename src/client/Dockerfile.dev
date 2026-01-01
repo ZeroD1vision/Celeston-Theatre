@@ -1,0 +1,23 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# 1. Копируем конфиги воркспейсов из корня
+COPY package.json package-lock.json ./
+# 2. Копируем конфиг конкретно клиента
+COPY src/client/package.json ./src/client/
+
+# 3. Использование кэша npm (фишка профи)
+# Это позволяет не скачивать пакеты заново, если они уже есть в кэше на вашей машине
+RUN --mount=type=cache,target=/root/.npm \
+    npm install --workspace=src/client --include=dev
+
+# 4. Копируем всё остальное
+COPY . .
+
+WORKDIR /app/src/client
+
+EXPOSE 3000
+
+# Для DEV лучше использовать npm install, чтобы можно было быстро менять пакеты
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
