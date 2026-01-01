@@ -1,0 +1,19 @@
+FROM node:22-alpine
+WORKDIR /app
+
+# Копируем конфиги воркспейсов
+COPY package.json package-lock.json ./
+COPY src/server/package.json ./src/server/
+
+# Используем кэш для быстрой пересборки
+RUN --mount=type=cache,target=/root/.npm \
+    npm install --workspace=src/server --include=dev
+
+# В DEV мы копируем всё, но Docker Compose потом перекроет это волюмами
+COPY . .
+
+WORKDIR /app/src/server
+
+EXPOSE 3001
+
+CMD ["npm", "run", "dev"]
