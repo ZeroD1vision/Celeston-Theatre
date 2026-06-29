@@ -1,4 +1,4 @@
-# 🎭 Celeston — Культурный хаб нового поколения
+# Сeleston — Культурный хаб нового поколения
 
 <table>
     <tr>
@@ -11,10 +11,6 @@
     </tr>
 </table>
 <!-- ![Celeston Logo](<https://github.com/ZeroD1vision/Celeston-Theatre/blob/main/Codes/Client/public/logo%20(text%3Dblack).png>) -->
-
-**Live Demo** | **📖 Документация** | **Исходный код**
-
-[![Посмотреть демо](https://img.shields.io/badge/Посмотреть_демо-8A2BE2)](https://celeston.ru) [![Исходный код](https://img.shields.io/badge/Исходный_код-000)](https://github.com/ZeroD1vision/celeston)
 
 ---
 
@@ -36,16 +32,16 @@ Celeston — это вымышленный культурный хаб, конц
 
 ---
 
-## Для разработчиков: Техническая реализация
+## Для разработчиков
 
 Этот проект — песочница для освоения и оттачивания навыков в сфере веб-технологий. Изначально начатый как курсовая работа, он перерос в постоянно развивающийся полноценный продукт, на котором мы пробуем и интегрируем новые инструменты.
 
 **Стек технологий:**
 
 Frontend: `React`, `React Router`, `Redux Toolkit`, `Context API`, `Axios`
-Backend: `Node.js`, `Express.js`, `JWT`, `OAuth 2.0`
+Backend: `Node.js`, `Express.js`, `JWT`, `OAuth 2.0`(запланировано)
 Database: `PostgreSQL`, `Sequelize`
-Infrastructure: `Docker`, `Docker Compose`, `Nginx`, `CI/CD` (Пока не выбрано)
+Infrastructure: `Docker`, `Docker Compose`, `Nginx`, `CI/CD` (Запланировано)
 
 **Реализованный функционал:**
 
@@ -58,14 +54,13 @@ Infrastructure: `Docker`, `Docker Compose`, `Nginx`, `CI/CD` (Пока не вы
 **Что дальше?**
 
 - [ ] Завершение интеграции аутентификации через Google
-- [ ] Внедрение системы онлайн-оплаты (например, через Stripe или YooKassa)
+- [ ] Внедрение системы онлайн-оплаты (Stripe или YooKassa)
 - [ ] Написание юнит- и интеграционных тестов (Jest, Cypress)
 - [ ] Настройка CI/CD (GitHub Actions/GitLab CI)
 - [ ] Переход на TypeScript для повышения надежности кода
 - [ ] Внедрение кэширования (Redis)
-- [ ] Разработка Progressive Web App (PWA) для мобильных устройств
+- [ ] Разработка приложения для мобильных устройств
 - [ ] Создание собственной CRM для максимального удобства взаимодействия администраторов
-- [ ] Создание собственного мобильного приложения
 
 ### Как запустить проект локально?
 
@@ -77,7 +72,7 @@ Infrastructure: `Docker`, `Docker Compose`, `Nginx`, `CI/CD` (Пока не вы
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-**Важно:** Проект является учебным и использует mock-данные и закрытые от публичного доступа API-ключи. Полный запуск возможен только при наличии всех переменных окружения. Ниже описана общая логика процесса развертывания.
+Проект является учебным и использует mock-данные и закрытые от публичного доступа API-ключи. Полный запуск возможен только при наличии всех переменных окружения. Ниже описана общая логика процесса развертывания.
 
 1.  **Настройка переменных окружения:**
     В корневой папке:
@@ -140,7 +135,7 @@ Infrastructure: `Docker`, `Docker Compose`, `Nginx`, `CI/CD` (Пока не вы
 
 Готово! Проект запущен в изолированной среде со всеми зависимостями.
 
-### 📂 Структура проекта
+### Структура проекта
 
 Структура клиента
 
@@ -181,7 +176,7 @@ Server/
 └──     └── movies.js  # Маршруты для фильмов
 ```
 
-## 🌟 Перспективы и Возможности
+## Перспективы и Возможности
 
 Помимо учебной цели, проект Celeston представляет собой законченную бизнес-модель с высоким потенциалом.
 
@@ -209,14 +204,14 @@ Server/
 <table align="center">
   <tr>
     <td align="center" width="50%">
-      📧 <strong>Email<br>
+      <strong>Email<br>
       <a href="mailto:anatolypozd739@gmail.com">anatolypozd739@gmail.com</a>
     </td>
     <td align="center" width="50%">
-      🔗 <strong>GitHub<br>
+      <strong>GitHub<br>
       <a href="https://github.com/ZeroD1vision">Профиль GitHub</a>
     </td>
   </tr>
 </table>
 
-#### 🔥 Загоримся же этой идеей вместе!
+#### Загоримся же этой идеей вместе!
